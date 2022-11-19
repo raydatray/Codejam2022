@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from .models import listing, User
-from .serializers import listingSerializer
+from .serializers import listingSerializer, userSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import HttpResponse
-
 
 # Create your views here.
 
@@ -13,7 +12,7 @@ from django.http import HttpResponse
 @api_view(["GET"])
 def getListing(request, id):
     if id == "all":
-        listings = listing.objects.all()
+        listings = listing.objects.all().order_by("scheduleTime")
         serializer = listingSerializer(listings, many=True)
     else:
         id = int(id)
@@ -51,8 +50,22 @@ def deleteListing(request, id):
 
 
 @api_view(["GET"])
-def sendRequest(request):
-    requestUser = User.objects.get(pk=request.GET["otherUserSessionId"])
-    current = User.objects.get(pk=request.GET["currentUser"])
+def sendRequest(request, currentUser, otherUserSessionId):
+    requestUser = User.objects.get(pk=currentUser)
+    current = User.objects.get(pk=otherUserSessionId)
     current.request.add(requestUser)
     return HttpResponse("all good")
+
+
+@api_view(["POST"])
+def createTempUser(request):
+    newUser = userSerializer(data=request.data)
+    if newUser.is_valid():
+        newUser.save()
+    return Response(newUser.data)
+
+
+@api_view(["GET"])
+def getUser(request, id):
+    user = User.objects.get(pk=id)
+    return Response(userSerializer(user).data)

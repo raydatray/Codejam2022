@@ -6,5 +6,7 @@ urlpatterns = [
     path("add/listing", views.createListing),
     path("update/listing/<int:id>", views.updateListing),
     path("delete/listing/<int:id>", views.deleteListing),
-    path("sendRequest/", views.sendRequest),
+    path("sendRequest/<int:currentId>/<int:otherUserSessionId>", views.sendRequest),
+    path("add/user", views.createTempUser),
+    path("get/user/<int:id>", views.getUser)
 ]
