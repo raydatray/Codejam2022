@@ -35,8 +35,8 @@
     <script>
       var posts;
       fetch("api/get/listing/all")
-        .then((response) => response.json())
-        .then((data) => {posts = data;})
+        .then(response => response.json())
+        .then(data => {posts = data;})
         .then(() => {console.log(posts);}); 
         
       console.log(posts.length)
