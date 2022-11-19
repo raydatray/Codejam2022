@@ -33,16 +33,9 @@
       </div>
     </div>
     <script>
-      let posts;
-      fetch("api/get/listing/all").then(
-        function(u){return u.json();}
-        ).then(
-        function(json){
-          posts=json;
-        }
-        )
-
-        console.log(posts)
+      fetch("api/get/listing/all")
+        .then((response) => response.json())
+        .then((data) => console.log(data));  
     </script>
   </body>
 </html>
