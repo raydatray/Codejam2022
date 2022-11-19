@@ -37,8 +37,8 @@
         .then((response) => response.json())
         .then((data) => console.log(data));
 
-      for (let x in data) {
-        console.log(x + ": " + data[x])
+      for (let x in response) {
+        console.log(x + ": " + response[x])
       }
     </script>
   </body>
