@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
     "chat",
     "main",
     "api",
@@ -42,6 +43,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
 ]
+
+ASGI_APPLICATION = "codejam22.asgi.application"
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
