@@ -35,11 +35,10 @@
     <script>
       async function post_fetcher() {
         let posts;
-
         const res = await fetch('api/get/listing/all')
-
         posts = await res.json();
-
+        console.log(posts);
+        
         for (let x in posts) {
           document.getElementById("Posts").innerHTML = posts[x].userName;
         }
