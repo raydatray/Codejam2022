@@ -33,9 +33,12 @@
       </div>
     </div>
     <script>
+      let posts;
       fetch("api/get/listing/all")
         .then((response) => response.json())
-        .then((data) => console.log(data));  
+        .then((data) => {posts = data; console.log(data)}); 
+        
+      console.log(posts.length)
     </script>
   </body>
 </html>
