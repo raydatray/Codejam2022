@@ -6,9 +6,10 @@ from django.db import models
 class User(models.Model):
     sessionId = models.IntegerField()
     profilePic = models.ImageField(default="default.jpg", upload_to="user_profile")
+    request = models.ManyToManyField("self", blank=True, symmetrical=False)
 
     def __str__(self) -> str:
-        return f"{self.sessionId} : {self.profilePic}"
+        return f"{self.id} : {self.sessionId} : {self.profilePic}"
 
 
 class listing(models.Model):
