@@ -16,7 +16,16 @@
           <div class="col-sm-9">
             <h3>Put your workout time</h3>
             <p>Your name</p>
-            <p>Yuur</p>
+            <script type ="text/javascript">
+              const xhr = new XMLHttpRequest();
+
+              xhr.onload = function() {
+                console.log(this);
+              };
+
+              xhr.open('get', '127.0.0.1:8000/api/get/listing/all');
+              xhr.send();
+            </script>
           </div>
           <div class="col-sm-3">
             <h3>Chat</h3>
