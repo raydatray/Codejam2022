@@ -34,15 +34,15 @@
     </div>
     <script>
       let posts;
-      fetch("api/get/listing/all")
-        .then(response => response.json())
-        .then(data => {posts = data;})
-        .then(() => {console.log(posts);
-        });
+      fetch("api/get/listing/all").then(
+        function(u){return u.json();}
+        ).then(
+        function(json){
+          posts=json;
+        }
+        )
 
-      for(let i =0; i < posts.length; i ++) {
-        console.log(posts[i])
-      }
+        console.log(posts)
     </script>
   </body>
 </html>
