@@ -33,13 +33,17 @@
       </div>
     </div>
     <script>
-      var posts;
-      fetch("api/get/listing/all")
-        .then(response => response.json())
-        .then(data => {posts = data;})
-        .then(() => {console.log(posts);}); 
-        
-      console.log(posts.length)
+      async function post_fetcher() {
+        let posts;
+
+        const res = await fetch('api/get/listing/all')
+
+        posts = await res.json();
+
+        console.log(posts)
+      }
+
+      post_fetcher();
     </script>
   </body>
 </html>
