@@ -3,10 +3,21 @@ from django.db import models
 # Create your models here.
 
 
+class User(models.Model):
+    sessionId = models.IntegerField()
+    profilePic = models.ImageField(default="default.jpg", upload_to="user_profile")
+
+    def __str__(self) -> str:
+        return f"{self.sessionId} : {self.profilePic}"
+
+
 class listing(models.Model):
     userName = models.CharField(max_length=100)
     scheduleTime = models.TimeField()
     createdTime = models.TimeField(auto_now=True)
+    userSession = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="creator"
+    )
 
     def __str__(self):
         return self.userName

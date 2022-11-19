@@ -1,3 +1,4 @@
 django==4.0.0
 djangorestframework
 channels==3.0.4
+Pillow
