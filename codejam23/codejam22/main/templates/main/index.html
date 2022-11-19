@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-sm-9">
           <h3>Put your workout time</h3>
-          <p>Your name</p>
+          <p><span id = "Posts"></span></p>
         </div>
         <div class="col-sm-3">
           <h3>Chat</h3>
@@ -40,7 +40,9 @@
 
         posts = await res.json();
 
-        console.log(posts)
+        for (let x in posts) {
+          document.getElementById("Posts").innerHTML = posts[x].userName;
+        }
       }
 
       post_fetcher();
