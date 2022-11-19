@@ -9,6 +9,11 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    //ask for name and pic
+    //get session id (in a cookie)
+    //send rest api name pic and session id
+    //get a user id back
+    //store the user id
   </head>
 
   <body>
@@ -20,7 +25,7 @@
       <div class="row">
         <div class="col-sm-9">
           <h3>Put your workout time</h3>
-          <p>Your name</p>
+          <p><span id = "Posts"></span></p>
         </div>
         <div class="col-sm-3">
           <h3>Chat</h3>
@@ -32,10 +37,28 @@
         </div>
       </div>
     </div>
-    <script>
-      fetch("api/get/listing/all")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    </script>
   </body>
+  <script>
+
+
+
+
+    async function post_fetcher() {
+        let posts;
+        const res = await fetch('api/get/listing/all')
+        posts = await res.json();
+        console.log(posts);
+
+        let feed_container = document.getElementById("Posts");
+        let numberOfPosts = posts.length;
+        
+        for (let i = 0; i<numberOfPosts; i++) {
+          var post = document.createElement("div");
+
+          post.innerHTML = "User :" + posts[i].userName + " Is going to Mcgym at " + posts[i].scheduleTime;
+          feed_container.appendChild(post);
+        }
+      }
+      post_fetcher();
+  </script>
 </html>
