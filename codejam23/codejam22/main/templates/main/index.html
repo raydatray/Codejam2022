@@ -36,15 +36,15 @@
         <div>
           <form class="box">
             <div>
-              <input class="time" type="time" />
-              <select class="dropdown" type="dropdown">
+              <input class="time" type="time" id="time"/>
+              <select class="dropdown" type="dropdown" id="exercise">
                 <option value="selection option">Select Option</option>
                 <option value="chest">Chest</option>
                 <option value="arms">Arms</option>
                 <option value="back">Back</option>
                 <option value="legs">Legs</option>
               </select>
-              <button class="button" style="float: right" type="button">Submit</button>
+              <button class="button" style="float: right" type="button" id = "gymrequest">Submit</button>
             </div>
           </form>
         </div>
@@ -85,9 +85,18 @@
       popup.classList.remove("open-popup");
     }
     
-    function post_generator(event) {
+    function post_generator() {
+      let time = document.getElementById("time").value;
+      let exercise_select = document.getElementById("exercise")
+      let exercise = exercise_select.options[exercise_select.selectedIndex].value;
 
+      console.log(time + exercise)
     }
+
+    const gym_request = document.getElementById("gymrequest")
+    gym_request.addEventListener('submit', post_generator)
+
+
     //Function for generating the feed
     async function post_fetcher() {
         let posts;
