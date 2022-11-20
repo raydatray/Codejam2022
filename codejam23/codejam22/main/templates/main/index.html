@@ -38,7 +38,24 @@
     </div>
   </body>
   <script>
+    function initial_setup(event){
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const name = data.get('PLACEHOLDER');
+      const pic = data.get('PLACEHOLDER');
 
+    }
+
+    function post_submit(event) {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const time = data.get('PLACEHOLDER');
+      const bodypart = data.get('PLACEHOLDER');
+
+    }
+
+    const gym_request = document.querySelector('PLACEHOLDER');
+    gym_request.addEventListener('submit', post_submit);
 
 
 
@@ -52,10 +69,18 @@
         let numberOfPosts = posts.length;
         
         for (let i = 0; i<numberOfPosts; i++) {
-          var post = document.createElement("div");
+          let post_div = document.createElement("div");
+            post.setAttribute('align-item', 'center');
 
-          post.innerHTML = "User :" + posts[i].userName + " Is going to Mcgym at " + posts[i].scheduleTime;
-          feed_container.appendChild(post);
+            let post_content = document.createElement("p");
+              post.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
+
+              let post_time = document.createElement("p");
+                post_time.innerHTML = "Posted at :" + posts[i].createdTime;
+          
+          post_div.appendChild(post_content);
+          post_div.append(post_timee)
+          feed_container.appendChild(post_div);
         }
       }
       post_fetcher();
