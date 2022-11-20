@@ -89,6 +89,22 @@
     function session_tracker(){
 
     }
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+            }
+          }
+      }
+    return cookieValue;
+    }
+    
     //function to add posts to the database
     async function post_generator() {
       let schedule_time = document.getElementById("time").value;
@@ -102,9 +118,10 @@
 
       const response = await fetch ('api/add/listing', {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'X-CSRFToken' : get_token
+          "X-CSRFToken": getCookie("csrftoken")
         },
         body: JSON.stringify(listing)
       });
