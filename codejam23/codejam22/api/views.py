@@ -69,3 +69,18 @@ def createTempUser(request):
 def getUser(request, id):
     user = User.objects.get(pk=id)
     return Response(userSerializer(user).data)
+
+@api_view(["PUT"])
+def acceptRequest(request, option, author, receiver):
+    authorObject = User.objects.get(pk=author)
+    receiverObject = User.objects.get(pk=receiver)
+
+    if option == 'accept':
+        receiverObject.acceptedRequest.add(authorObject)
+
+    elif option == 'reject':
+        authorObject.request.remove(receiverObject)
+    
+    receiverObject.acceptedRequest.add(authorObject)
+
+

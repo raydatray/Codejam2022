@@ -7,6 +7,9 @@ class User(models.Model):
     sessionId = models.IntegerField()
     profilePic = models.ImageField(default="default.jpg", upload_to="user_profile")
     request = models.ManyToManyField("self", blank=True, symmetrical=False)
+    acceptedRequest = models.ManyToManyField(
+        "self", blank=True, symmetrical=False, related_name="Accepted_Notification"
+    )
 
     def __str__(self) -> str:
         return f"{self.id}:{self.profilePic}"

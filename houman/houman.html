@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Navbar</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <header>
+    <a class="logo" href="/"><img src="#" alt="logo" /></a>
+    <button type="submit" class="cta" onclick="openPopup()">
+      Notifications
+    </button>
+    <div class="popup" id="popup">
+      <h2>Notifications</h2>
+      <p>James accepted your buddy request!</p>
+      <button type="button" onclick="closePopup()">Close</button>
+    </div>
+  </header>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <div id="profilebox" align-item="center">
+          <img src="Timpart2.png" class="profilepic" alt="profile pic" />
+          <img src="checkmark.png" alt="active status" align-item="right" />
+          <p>Tim Pham</p>
+          <p>Hitting legs today at 9pm! Looking for a gymbuddy.</p>
+          <button class="slide" type="button">Join</button>
+          <div id="time">Posted 3:08 pm</div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div id="fb">
+          <div id="fb-top">
+            <p><b>New Buddy Request</b></p>
+          </div>
+          <div class="buddyBox">
+            <img class="notifPic" src="Timpart2.png" alt="Profile Picture" />
+            <div class="buddyName">
+              <b>Tim Pham</b>
+            </div>
+          </div>
+          <div id="button-block">
+            <div id="accept">Accept</div>
+            <div id="reject">Reject</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- nav bar stuff-->
+
+    <!-- buddy request stuff-->
+  </body>
+  <script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+      popup.classList.add("open-popup");
+    }
+    function closePopup() {
+      popup.classList.remove("open-popup");
+    }
+  </script>
+</html>
