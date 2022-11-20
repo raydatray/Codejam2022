@@ -55,7 +55,7 @@
     }
 
     const gym_request = document.querySelector('PLACEHOLDER');
-    gym_request.addEventListener('submit', post_submit);
+    //gym_request.addEventListener('submit', post_submit);
 
 
 
@@ -70,16 +70,16 @@
         
         for (let i = 0; i<numberOfPosts; i++) {
           let post_div = document.createElement("div");
-            post.setAttribute('align-item', 'center');
+            post_div.setAttribute('align-item', 'center');
 
             let post_content = document.createElement("p");
-              post.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
+              post_content.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
 
               let post_time = document.createElement("p");
                 post_time.innerHTML = "Posted at :" + posts[i].createdTime;
           
           post_div.appendChild(post_content);
-          post_div.append(post_timee)
+          post_div.append(post_time)
           feed_container.appendChild(post_div);
         }
       }
