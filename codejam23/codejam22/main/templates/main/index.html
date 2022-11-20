@@ -95,8 +95,13 @@
       const post_time = post_date.getHours() + ":" + post_date.getMinutes() + ":" + post_date.getSeconds();
       const listing = {scheduleTime: schedule_time, bodyPart : exercise, createdTime: post_time};
       
+      console.log(listing);
+      
       const response = await fetch ('api/add/listing', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
         body: JSON.stringify(listing)
       });
 
