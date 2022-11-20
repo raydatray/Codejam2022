@@ -57,6 +57,7 @@
           </div> -->
           </form>
         </div>
+
         <div id="profilebox" align-item="center">
           <img src="Timpart2.png" class="profilepic" alt="profile pic" />
           <img src="checkmark.png" alt="active status" align-item="right" />
@@ -65,6 +66,7 @@
           <button class="slide" type="button">Join</button>
           <div id="time">Posted 3:08 pm</div>
         </div>
+        -->
       </div>
       <div class="sidebar">
         <div id="fb">
@@ -98,5 +100,34 @@
     function closePopup() {
       popup.classList.remove("open-popup");
     }
+    
+    async function post_fetcher() {
+        let posts;
+        const res = await fetch('api/get/listing/all')
+        posts = await res.json();
+        console.log(posts);
+
+        let feed_container = document.getElementById("Posts");
+        let numberOfPosts = posts.length;
+        
+        for (let i = 0; i<numberOfPosts; i++) {
+          let post_div = document.createElement("div");
+            post_div.setAttribute('align-item', 'center');
+            post_div.setAttribute('id', 'profilebox')
+
+            let post_content = document.createElement("p");
+              post_content.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
+
+              let post_time = document.createElement("p");
+                post_time.innerHTML = "Posted at :" + posts[i].createdTime;
+          
+          post_div.appendChild(post_content);
+          post_div.append(post_time)
+          feed_container.appendChild(post_div);
+        }
+      }
+      post_fetcher();
+    
+
   </script>
 </html>
