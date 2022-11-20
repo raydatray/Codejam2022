@@ -26,18 +26,7 @@
   </header>
   <body>
     <div class="wrapper">
-      <div class="profilebox", id="Posts">
-        <!--
-        <div id="profilebox" align-item="center">
-          <img src="Timpart2.png" class="profilepic" alt="profile pic" />
-          <img src="checkmark.png" alt="active status" align-item="right" />
-          <p>Tim Pham</p>
-          <p>Hitting legs today at 9pm! Looking for a gymbuddy.</p>
-          <button class="slide" type="button">Join</button>
-          <div id="time">Posted 3:08 pm</div>
-        </div>
-        -->
-      </div>
+      <div class="profilebox", id="Posts"></div>
       <div class="sidebar">
         <div id="fb">
           <div id="fb-top">
@@ -85,16 +74,21 @@
             post_div.setAttribute('align-item', 'center');
             post_div.setAttribute('id', 'profilebox')
 
-            let post_content = document.createElement("p");
-              post_content.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
+          let post_content = document.createElement("p");
+            post_content.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
 
-              let post_time = document.createElement("p");
-                post_time.innerHTML = "Posted at :" + posts[i].createdTime;
+          let post_time = document.createElement("p");
+            post_time.innerHTML = "Posted at :" + posts[i].createdTime;
           
+          let join_button = document.createElement("b");
+            join_button.setAttribute('class' = 'slide');
+            join_button.setAttribute('type' = 'button');
+            join_button.setAttribute('value' = 'Go!');
+
           feed_container.appendChild(post_div);
           post_div.appendChild(post_content);
-          post_div.appendChild(post_time)
-          
+          post_div.appendChild(post_time);
+          post_div.append(join_button);
         }
       }
       post_fetcher();
