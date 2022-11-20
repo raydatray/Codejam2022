@@ -91,9 +91,10 @@
               let post_time = document.createElement("p");
                 post_time.innerHTML = "Posted at :" + posts[i].createdTime;
           
-          post_div.appendChild(post_content);
-          post_div.append(post_time)
           feed_container.appendChild(post_div);
+          post_div.appendChild(post_content);
+          post_div.appendChild(post_time)
+          
         }
       }
       post_fetcher();
