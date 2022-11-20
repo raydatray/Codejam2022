@@ -87,15 +87,15 @@
     
     function post_generator() {
       let time = document.getElementById("time").value;
-      let exercise_select = document.getElementById("exercise")
+
+      let exercise_select = document.getElementById("exercise");
       let exercise = exercise_select.options[exercise_select.selectedIndex].value;
 
-      console.log(time + exercise)
+      console.log(time + exercise);
     }
 
-    const gym_request = document.getElementById("gymrequest")
-    gym_request.addEventListener('submit', post_generator)
-
+    const gym_request = document.getElementById("gymrequest");
+    gym_request.addEventListener('submit', post_generator);
 
     //Function for generating the feed
     async function post_fetcher() {
