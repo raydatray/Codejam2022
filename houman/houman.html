@@ -13,7 +13,12 @@
     />
   </head>
   <header>
-    <a class="logo" href="/"><img src="#" alt="logo" /></a>
+    <a class="logo" href="/"
+      ><img
+        src="./mcgill-university-1-logo-png-transparent.png"
+        style="height: 100px; width: auto"
+        alt="logo"
+    /></a>
     <button type="submit" class="cta" onclick="openPopup()">
       Notifications
     </button>
@@ -25,8 +30,34 @@
   </header>
   <body>
     <div class="wrapper">
-      <div class="Posts">
-        <!--
+      <div class="main">
+        <div>
+          <form class="box">
+            <div>
+              <input class="time" type="time" />
+              <select class="dropdown" type="dropdown">
+                <option value="selection option">Select Option</option>
+                <option value="chest">chest</option>
+                <option value="legs">legs</option>
+                <option value="back">back</option>
+                <option value="bicep">bicep</option>
+                <option value="shoulders">shoulders</option>
+                <option value="tricep"></option>
+              </select>
+
+              <button class="button" style="float: right" type="button">
+                Submit
+              </button>
+            </div>
+            <!-- 
+          <div class="box">
+            <p>Enter the body parts you desire to workout:</p>
+    
+            <p>Enter the time you plan on going to the gym:</p>
+          </div> -->
+          </form>
+        </div>
+
         <div id="profilebox" align-item="center">
           <img src="Timpart2.png" class="profilepic" alt="profile pic" />
           <img src="checkmark.png" alt="active status" align-item="right" />
