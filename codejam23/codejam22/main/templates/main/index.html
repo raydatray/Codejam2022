@@ -85,13 +85,23 @@
       popup.classList.remove("open-popup");
     }
     
-    function post_generator() {
-      let time = document.getElementById("time").value;
+    async function post_generator() {
+      let schedule_time = document.getElementById("time").value;
 
       let exercise_select = document.getElementById("exercise");
       let exercise = exercise_select.options[exercise_select.selectedIndex].value;
+      
+      const post_date = new Date();
+      const post_time = post_date.getHours() + ":" + post_date.getMinutes() + ":" + post_date.getSeconds();
+      const listing = {scheduleTime: schedule_time, bodyPart : exercise, createdTime: post_time};
+      
+      const response = await fetch ('add/listing', {
+        method: 'POST',
+        body: JSON.stringify(listing)
+      });
 
-      console.log(time + exercise);
+      const responseMsg = await response.text();
+      console.log(responseMsg);
     }
 
     const gym_request = document.getElementById("gymrequest");
