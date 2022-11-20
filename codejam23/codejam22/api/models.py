@@ -19,7 +19,7 @@ class listing(models.Model):
     userSession = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="creator"
     )
-    # bodyPart = models.CharField(max_length=100)
+    bodyPart = models.CharField(max_length=100)
 
     def __str__(self):
         return self.userName
