@@ -11,6 +11,8 @@ class listingSerializer(serializers.ModelSerializer):
 
 
 class userSerializer(serializers.ModelSerializer):
+    request = serializers.ManyRelatedField
+
     class Meta:
         model = User
         fields = "__all__"

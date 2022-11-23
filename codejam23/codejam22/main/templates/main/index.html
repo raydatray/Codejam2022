@@ -1,41 +1,171 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>McGym Buddy Finder</title>
+    <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
     />
   </head>
-
-  <body>
-    <div class="container-fluid p-5 bg-primary text-white text-center">
-      <h1>McGym Buddy Finder</h1>
-      <p>Looking for a workout buddy? This is the right place to be!</p>
+  <header>
+    <a class="logo" href="/">
+    <img 
+      src="{% static 'mcgill-university-1-logo-png-transparent.png' %}"
+      style="height: 100px; width: auto"
+      alt="logo" 
+    />
+    </a>
+    <button type="submit" class="cta" onclick="openPopup()">
+      Notifications
+    </button>
+    <div class="popup" id="popup">
+      <h2>Notifications</h2>
+      <p>James accepted your buddy request!</p>
+      <button type="button" onclick="closePopup()">Close</button>
     </div>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-sm-9">
-          <h3>Put your workout time</h3>
-          <p>Your name</p>
+  </header>
+  <body>
+    <div class="wrapper">
+      <div class ="main">
+        <div>
+          <form class="box">
+            <div>
+              <input class="time" type="time" id="time"/>
+              <select class="dropdown" type="dropdown" id="exercise">
+                <option value="selection option">Select Option</option>
+                <option value="chest">Chest</option>
+                <option value="arms">Arms</option>
+                <option value="back">Back</option>
+                <option value="legs">Legs</option>
+              </select>
+              <button class="button" style="float: right" type="button" id = "gymrequest">Submit</button>
+            </div>
+          </form>
         </div>
-        <div class="col-sm-3">
-          <h3>Chat</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris...
-          </p>
-        </div>
+
+        <div class="profilebox", id="Posts"></div>
+
+        <div class="sidebar">
+          <div id="fb">
+            <div id="fb-top">
+              <p><b>New Buddy Request</b></p>
+            </div>
+            <div class="buddyBox">
+              <img class="notifPic" src="Timpart2.png" alt="Profile Picture" />
+              <div class="buddyName">
+                <b>Tim Pham</b>
+              </div>
+            </div>
+            <div id="button-block">
+              <div id="accept">Accept</div>
+              <div id="reject">Reject</div>
+            </div>
+          </div>
+      </div>
       </div>
     </div>
-    <script>
-      fetch("api/get/listing/all")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    </script>
+
+    <!-- nav bar stuff-->
+
+    <!-- buddy request stuff-->
   </body>
+
+  <script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+      popup.classList.add("open-popup");
+    }
+    function closePopup() {
+      popup.classList.remove("open-popup");
+    }
+    
+    function session_tracker(){
+
+    }
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+            }
+          }
+      }
+    return cookieValue;
+    }
+    
+    //function to add posts to the database
+    async function post_generator() {
+      let schedule_time = document.getElementById("time").value;
+
+      let exercise_select = document.getElementById("exercise");
+      let exercise = exercise_select.options[exercise_select.selectedIndex].value;
+      
+      const post_date = new Date();
+      const post_time = post_date.getHours() + ":" + post_date.getMinutes() + ":" + post_date.getSeconds();
+      const listing = {scheduleTime: schedule_time, bodyPart : exercise, createdTime: post_time};
+
+      const response = await fetch ('api/add/listing', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          "X-CSRFToken": getCookie("csrftoken")
+        },
+        body: JSON.stringify(listing)
+      });
+
+      const responseMsg = await response.text();
+      console.log(responseMsg);
+    }
+
+    const gym_request = document.getElementById("gymrequest");
+    gym_request.addEventListener('click', post_generator);
+
+    //Function for generating the feed
+    async function post_fetcher() {
+        let posts;
+        const res = await fetch('api/get/listing/all')
+        posts = await res.json();
+        console.log(posts);
+
+        let feed_container = document.getElementById("Posts");
+        let numberOfPosts = posts.length;
+        
+        for (let i = 0; i<numberOfPosts; i++) {
+          let post_div = document.createElement("div");
+            post_div.setAttribute('align-item', 'center');
+            post_div.setAttribute('id', 'profilebox')
+
+          let post_content = document.createElement("p");
+            post_content.innerHTML = "User :" + posts[i].userName + " is going to Mcgym at " + posts[i].scheduleTime;
+
+          let post_time = document.createElement("p");
+            post_time.innerHTML = "Posted at :" + posts[i].createdTime;
+          
+          let join_button = document.createElement("b");
+            join_button.setAttribute('class', 'slide');
+            join_button.setAttribute('type', 'button');
+            join_button.innerHTML = "Go!";
+
+          feed_container.appendChild(post_div);
+          post_div.appendChild(post_content);
+          post_div.appendChild(post_time);
+          post_div.append(join_button);
+        }
+      }
+      post_fetcher();
+      console.log("test");
+  </script>
 </html>
